@@ -1,0 +1,130 @@
+images
+Container
+Docker
+
+> https://www.docker.com/
+> 
+
+RDMS
+> Oracle
+> Mysql https://dzone.com/articles/docker-for-mac-mysql-setup
+> SqlServer
+> Db2
+> Postgres https://hackernoon.com/dont-install-postgres-docker-pull-postgres-bee20e200198
+> sybase 
+> maria
+> Aurora
+
+
+docker image ls
+> https://dzone.com/articles/docker-for-mac-mysql-setup
+
+> To Run MysqlServer <
+docker run -p 3306:3306 -d --name mysql -e MYSQL_ROOT_PASSWORD=password mysql/mysql-server
+
+> Check all images <
+docker image ls
+
+> delete all images <
+docker system prune -a
+
+
+>Step1
+docker run -p 3306:3306 -d --name mysql -e MYSQL_ROOT_PASSWORD=password mysql/mysql-server
+> Step 2 (to check containers)
+docker ps
+> Step3 (go inside container)
+docker exec -it mysql bash
+> Step4 (Open mysql server)
+mysql -uroot -ppassword
+> Step 5 ( create user)
+CREATE USER 'developerfunnel'@'%' IDENTIFIED BY 'password';
+> Step 6 (For Admin Access)
+GRANT ALL PRIVILEGES ON * . * TO 'arun'@'%';
+
+
+
+////////////////////////////////
+DDL  > We you create DB,Tables. Define structure
+DML  > Insert Delete Update Select (CRUD)
+
+
+>>>>>>>>>>>>>>>Data Type<<<<<<<<<<<<<<<<<<<
+INT: Whole Number
+FLOAT(M,D) >  Decimal number(apprximate)
+DECIMAL(M,D) >  Decimal number(precise)
+
+
+10.22
+FLOAT(2,2)
+
+CHAR(N) > Fixed length character
+VARCHAR(N)> Variable length character
+ENUM('M','F') > Value for defined List
+BOOLEAN: True or False values
+
+
+CHAR(6)
+VARCHAR(6)
+
+var a: VARCHAR(6)= "abc"
+var a: CHAR(6)= "abcXXX"
+
+DATE: date(YYYY-MM-DD)
+DATETIME date and Time(YYYY-MM-DD HH-MM-SS)
+TIME: Time(HH-MM-SS)
+YEAR: Year(YYYY)
+
+//////////////////////////////
+Relation 
+> Join
+> Primary Key > Unique Value
+> Foreign
+
+
+Product
+-------------------------
+PId | Name | Origin | price
+
+
+
+Order Tables
+--------------------------
+OId| Usname | Phone | P_Id
+
+
+////////////////////////////////////////
+SHOW DATABASES;
+
+CREATE DATABASE coffee_store;
+
+USE coffee_store;
+
+CREATE TABLE products(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(30),
+    price DECIMAL(3,2)
+);
+
+DESC products;
+
+CREATE TABLE customers (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(30),
+    last_name VARCHAR(30),
+    gender ENUM('M','F'),
+    phone_number VARCHAR(11)
+);
+DESC customers;
+
+CREATE TABLE orders (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT,
+    customer_id INT,
+    order_time DATETIME,
+    FOREIGN KEY (product_id) REFERENCES products(id),
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+);
+
+SHOW TABLES;
+DESC orders;
