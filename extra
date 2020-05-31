@@ -1,0 +1,21 @@
+//Very First Time///
+
+>Download GitBash
+(https://git-scm.com/downloads)
+
+git init
+git add .
+git commit -m "first commit"
+git remote add origin https://github.com/Aakashdeveloper/testrepo.git
+git push -u origin master
+                
+
+git add .
+git commit -m "second commit"
+git push
+
+
+> Step1
+git clone https://github.com/Aakashdeveloper/Edu_Mysql_June.git
+> Step2
+git pull

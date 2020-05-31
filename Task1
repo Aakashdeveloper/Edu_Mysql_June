@@ -1,0 +1,10 @@
+> ADD a primary key to the is fields in the pet and people table.
+
+> ADD a foreign key to the owner_id field in the pets table  referencing the id
+  field in the people table
+
+> Add a column named email to the people table.
+
+> Add a unique constraint to the email column in the people table
+
+> Rename the name column in the pets table to the 'first_name'

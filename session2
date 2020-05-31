@@ -1,0 +1,174 @@
+SELECT * FROM products;
+
+ALTER TABLE products ADD COLUMN coffee_origin VARCHAR(30);
+
+ALTER TABLE products
+DROP COLUMN coffee_origin
+////////////////////
+
+CREATE DATABASE example;
+
+USE example;
+
+CREATE TABLE test {
+    id INT AUTO_INCERMENT PRIMARY KEY,
+    name VARCHAR(30),
+    age INT
+}
+
+
+SELECT * FROM test;
+SHOW tables;
+
+//Delete complete table
+DROP TABLE test;
+
+// Delete data from table
+TRUNCATE TABLE test;
+
+/////////////////////
+Create DB and tables
+////////////////////
+
+
+CREATE DATABASE test;
+
+USE test;
+
+CREATE TABLE addresses(
+	id int,
+    house_number int,
+    city varchar(20),
+    postcode varchar(7)
+);
+
+CREATE TABLE people(
+	id int,
+    firts_name varchar(20),
+    last_name varchar(20),
+    address_id int
+);
+
+CREATE TABLE pets(
+	id int,
+    name varchar(20),
+    species varchar(20),
+    owner_id int
+);
+
+SHOW TABLES
+
+/////////////////////
+ADD/REMOVE PRIMARY CONSTRAINT
+////////////////////
+
+-- SQL TO  ADD PRIMARY KEY
+ALTER TABLE <tablename>
+ADD PRIMARY KEY (columnname);
+
+-- SQL TO  REMOVE PRIMARY KEY
+ALTER TABLE <tablename>
+DROP PRIMARY KEY;
+
+DESCRIBE addresses;
+
+ALTER TABLE addresses ADD PRIMARY KEY (id);
+ALTER TABLE addresses DROP primary key;
+
+DESCRIBE people;
+ALTER TABLE people ADD PRIMARY KEY (id);
+ALTER TABLE people DROP primary key;
+
+/////////////////////
+ADD/REMOVE foreign CONSTRAINT
+////////////////////
+USE TEST
+
+-- HOW to add foreign key to a table
+ALTER TABLE <tablename>
+ADD CONSTRAINT <constraintname>
+FOREIGN Key(<columnname>) REFFERENCES <tablename>(<columnname>)
+
+-- HOW to remove foreign key to a table
+ALTER TABLE <tablename>
+DROP FOREIGN Key <constraintname>
+
+DESCRIBE addresses;
+DESCRIBE people;
+
+ALTER TABLE addresses ADD PRIMARY KEY (id);
+
+ALTER TABLE people 
+ADD CONSTRAINT FK_PeopleAddress 
+FOREIGN Key (address_id) REFERENCES addresses(id);
+
+
+21:18:55	ALTER TABLE people DROP FOREIGN Key FK_PeopleAddress	Error Code: 1091. Can't DROP 'FK_PeopleAddress'; check that column/key exists	0.011 sec
+
+
+USE example;
+-- HOW to add foreign key to a table
+ALTER TABLE <tablename>
+ADD CONSTRAINT <constraintname>
+FOREIGN Key(<columnname>) REFFERENCES <tablename>(<columnname>)
+
+-- HOW to remove foreign key to a table
+ALTER TABLE <tablename>
+DROP FOREIGN Key <constraintname>
+
+
+DESCRIBE addresses;
+DESCRIBE people;
+
+ALTER TABLE addresses DROP primary key;
+ALTER TABLE addresses ADD PRIMARY KEY (id);
+
+ALTER TABLE people 
+ADD CONSTRAINT FK_PeopleAddress 
+FOREIGN Key (address_id) REFERENCES addresses(id);
+
+-- Check how to remove FOREIGN key
+ALTER TABLE people
+DROP FOREIGN Key FK_PeopleAddress
+
+
+
+/////////////////////
+ADD/REMOVE UNIQUE CONSTRAINT
+////////////////////
+
+USE example;
+ -- HOW TO ADD A UNIQUE CONSTRAINT to column
+ ALTER TABLE <tablename>
+ ADD CONSTRAINT <constraintname> UNIQUE (<columnName>)
+ 
+ -- HOW TO REMOVE A UNIQUE CONSTRAINT to column
+ ALTER TABLE <tablename>
+ DROP INDEX <constraintname
+
+ USE example;
+
+SELECT * FROM pets;
+
+ALTER TABLE pets
+ADD constraint my_species unique (species);
+
+ ALTER TABLE pets
+ DROP INDEX my_species;
+ 
+DESC pets;
+
+
+/////////////////////
+CHANGE Column name
+////////////////////
+ALTER TABLE <tablename> CHANGE `old_column_name` `new_column_name` <data type>
+
+SELECT * from pets;
+
+ALTER TABLE pets CHANGE `species` `animal_type` VARCHAR(20);
+
+DESC addresses;
+
+ALTER TABLE addresses modify city CHAR(20);
+

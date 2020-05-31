@@ -1,0 +1,108 @@
+USE coffee_store;
+
+SELECT * FROM products;
+
+USE coffee_store;
+
+SELECT * FROM products;
+ALTER TABLE products ADD COLUMN coffee_origin VARCHAR(30);
+
+INSERT INTO <table_name>(<column1>,<column2>,<column3>) 
+VALUES ('',3,3,'')
+
+DESC products;
+
+INSERT INTO products(name,price,coffee_origin) 
+VALUES ('Expresso',2.50,'Brazil');
+
+INSERT INTO products(name,price,coffee_origin) 
+VALUES ('MAcchiato',3.40,'Brazil'), ('Cappuccino',3.50,'Costa Rica')
+
+INSERT INTO products(name,price,coffee_origin) 
+VALUES ('Expresso',2.50,'Brazil'),('Latte',3.40,'Inodnesia'),('Americano',3.50,'Brazil'),('FLAT WHITE',3.00,'Finland'),('Filter',3.50,'India'),('MAcchiato',3.40,'Brazil'), ('Cappuccino',3.50,'Costa Rica')
+
+
+/////////////////
+DELETE
+///////////////
+22:31:27	TRUNCATE TABLE products	Error Code: 1701. Cannot truncate a table referenced in a foreign key constraint (`coffee_store`.`orders`, CONSTRAINT `orders_ibfk_1`)	0.016 sec
+
+
+
+SELECT * FROM products;
+
+SET SQL_SAFE_UPDATES=0;
+
+DELETE FROM products
+WHERE id = 1;
+
+INSERT INTO products(id,name,price,coffee_origin) 
+VALUES (1,'Expresso',2.50,'Brazil');
+
+TRUNCATE TABLE products;
+
+DELETE FROM products
+WHERE id = 6;
+
+DESC customers;
+
+INSERT INTO customers (first_name, last_name, gender, phone_number) VALUES 
+('Chris','Martin','M','01123147789'),('Emma','Law','F','01123439899'),('Mark','Watkins','M','01174592013'),
+('Daniel','Williams','M',NULL),('Sarah','Taylor','F','01176348290'),('Katie','Armstrong','F','01145787353'),
+('Michael','Bluth','M','01980289282'),('Kat','Nash','F','01176987789'),('Buster','Bluth','M','01173456782'),
+('Charlie',NULL,'F','01139287883'),('Lindsay','Bluth','F','01176923804'),('Harry','Johnson','M',NULL),
+('John','Smith','M','01174987221'),('John','Taylor','M',NULL),('Emma','Smith','F','01176984116'),
+('Gob','Bluth','M','01176985498'),('George','Bluth','M','01176984303'),('Lucille','Bluth','F','01198773214'),
+('George','Evans','M','01174502933'),('Emily','Simmonds','F','01899284352'),('John','Smith','M','01144473330'),
+('Jennifer',NULL,'F',NULL),('Toby','West','M','01176009822'),('Paul','Edmonds','M','01966947113');
+
+SELECT * FROM customers;
+
+DESC orders;
+
+DROP TABLE orders;
+
+INSERT INTO products(name,price,coffee_origin) 
+VALUES ('Expresso',2.50,'Brazil'),('Latte',3.40,'Inodnesia'),('Americano',3.50,'Brazil'),('FLAT WHITE',3.00,'Finland'),
+('Filter',3.50,'India'),('MAcchiato',3.40,'Brazil'), ('Cappuccino',3.50,'Costa Rica');
+
+CREATE TABLE orders (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT,
+    customer_id INT,
+    order_time DATETIME,
+    FOREIGN KEY (product_id) REFERENCES products(id),
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+);
+
+
+////////////
+UPDATE 
+/////////
+UPDATE products 
+SET coffee_origin="Sri Lanka"
+WHERE id= 3;
+
+USE coffee_store;
+
+SELECT * FROM products;
+
+UPDATE products 
+SET coffee_origin="Sri Lanka"
+WHERE id= 3;
+
+UPDATE products
+SET price=3.25, coffee_origin='Ethiopia'
+WHERE name="MAcchiato"
+
+USE coffee_store;
+
+SELECT * FROM products;
+
+UPDATE products 
+SET coffee_origin="Sri Lanka"
+WHERE id= 3;
+
+UPDATE products
+SET price=3.25, coffee_origin='Ethiopia'
+WHERE name="MAcchiato"
