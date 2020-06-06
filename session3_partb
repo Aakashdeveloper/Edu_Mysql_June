@@ -1,0 +1,19 @@
+Relationship
+> One to One  (product have details in product_detaild)
+> One to Many (Customer can place multiple order)
+> Many to Many
+
+Constraints
+> NOT NULL - A column cannot contains any null values
+> UNIQUE  - A column cannot contains any duplicate values
+> PRIMARY KEY = A column that uniquely identifies  each row of  data
+> FOREIGN KEY > A column which is related to a primary key in another table
+> CHECK > Controls the value that can be inserted into a cloumn
+> DEFAULT > If no value inserted set default value
+
+
+DB Schema
+> Golden Key presert > PRIMARY Key
+> Empty Diamond > Normal column no relation not primary
+> Diamond Green > Not FOREIGN key and not null
+> Diamond Red > Not Null and FOREIGN key

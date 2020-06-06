@@ -1,0 +1,163 @@
+USE coffee_store;
+SELECT * FROM products;
+SELECT * FROM customers;
+SELECT * FROM orders;
+
+SELECT distinct customer_id,product_id FROM orders 
+WHERE order_time Between '2017-02-01' AND '2017-02-28';
+
+SELECT * FROM customers LIMIT 10 OFFSET 5;
+
+SELECT * FROM customers 
+ORDER BY last_name
+LIMIT 10;
+
+SELECT name AS coffee, price, coffee_origin AS country from products;
+
+////////////////////////////////////
+JOINS
+/////////////////////////////
+Inner JOIN> Will retrieve data only when there is matching value in both the tables
+Left JOIN> Will retrieve data from the left table(table1) and matching row from 
+           the right table(table2)
+Right JOIN> Will retrieve data from the right table(table2) and matching row from 
+           the left table(table1)
+
+
+SELECT products.name, orders.order_time from orders INNER JOIN products
+ON orders.product_id = products.id;
+
+SELECT products.name, orders.order_time from orders  LEFT JOIN products
+ON orders.product_id = products.id;
+
+
+SELECT o.id,c.phone_number,c.last_name,o.order_time FROM orders o
+RIGHT JOIN customers c ON o.customer_id = c.id
+ORDER BY o.order_time
+LIMIT 10;
+
+SELECT p.name, o.order_time from orders o  JOIN products p
+ON o.product_id = p.id
+WHERE o.product_id =5
+order BY o.order_time;
+
+
+SELECT p.name,p.price,c.first_name,c.last_name,o.order_time FROM products p
+JOIN orders o ON p.id = o.product_id
+JOIN customers c ON c.id=o.customer_id
+WHERE o.order_time Between '2017-02-01' AND '2017-02-28'
+order BY o.order_time;
+
+SELECT p.name,p.price,c.first_name,c.last_name,o.order_time FROM products p
+JOIN orders o ON p.id = o.product_id
+JOIN customers c ON c.id=o.customer_id
+WHERE o.order_time Between '2017-02-01' AND '2017-02-06'
+order BY o.order_time;
+
+
+> SELECT the order id and customers phone number from all orders of product id 4
+> SELECT product name and order time for filter coffee sold between JAn 15 2017
+> SELECT thr product name and price and order time for all orders  from females in jan   2017
+
+
+NORMALIZATION
+> Process of efficiently organizing data in a database
+> WHY?
+> To eliminate redundant data.
+> To only store related data in a table
+
+1N
+2N
+3N
+
+Student | YEAR | Class | Teacher
+John    |  9   | React | Ankit
+Tom     |  9   | React | Ankit
+Sarah   |  8   | Node  | Aakash
+Charile |  9   | React | Ankit
+Barnes  |  10  | Sql   | Bhumika
+
+
+Benefits:
+> Reduce storage space
+> Reduece insert,update and deletion 
+> improve query performance
+
+
+What is 1NF
+> No Repeated rows of data
+> Colums only Conatins a single value
+> The table has a primary key
+
+What is 2NF
+> They conform to 1NF
+> Every column that is not a primary key of the table is 
+  dependent on the whole of the primary key
+
+What is 3NF
+> They conform to 2NF
+> Every column that is not a primary key  is only
+  dependent on the whole of the primary key
+
+/////1NF////
+Student | Year | Class
+Paul    | 11   | Math
+Peggy   | 10   | History
+Paul    | 11   | Math
+Brain   | 8    | English, Chemistry
+Linda   | 7    | Math, History, Biology
+
+Student | Year | Class
+Paul    | 11   | Math
+Peggy   | 10   | History
+Brain   | 8    | English
+Brain   | 8    | Chemistry
+Linda   | 7    | Math
+Linda   | 7    | History
+Linda   | 7    | Biology
+
+//2NF////
+
+Student | Subject | GRADE | AGE
+Natasha | React   | A     | 15
+Natasha | Angular | B     | 15
+Daniel  | Node    | C     | 16
+Simon   | React   | A     | 14
+Emma    | SQL     | B     | 14
+
+id| Student_id | Subject | GRADE
+1 | 1     | React   | A    
+2 | 1     | Angular | B     
+3 | 2     | Node    | C     
+4 | 3     | React   | A     
+5 | 4     | SQL     | B     
+
+Student | AGE  | Name
+1       | 15   | Natasha
+2       | 16   | Daniel
+3       | 14   | Simon
+4       | 14   | Emma
+
+
+//3NF////
+Subject | YEAR | Star PUPIL | Star PUPIL date 
+MATH    | 2015 | Mathew     | 1999-03-21
+Engl    | 2015 | William     | 1999-03-21
+Hind    | 2015 | Georgina     | 1999-03-21
+MATH    | 2016 | Brain     | 1999-03-21
+Phys    | 2017 | William     | 1999-03-21
+
+
+Subject | YEAR | Star PUPIL 
+MATH    | 2015 | Mathew    
+Engl    | 2015 | William   
+Hind    | 2015 | Georgina    
+MATH    | 2016 | Brain    
+Phys    | 2017 | William    
+
+Star PUPIL | Star PUPIL date 
+Mathew     | 1999-03-21
+William     | 1999-03-21
+Georgina     | 1999-03-21
+Brain     | 1999-03-21
+William     | 1999-03-21

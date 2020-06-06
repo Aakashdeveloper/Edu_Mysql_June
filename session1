@@ -105,9 +105,6 @@ CREATE TABLE products(
     name VARCHAR(30),
     price DECIMAL(3,2)
 );
-
-DESC products;
-
 CREATE TABLE customers (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30),
@@ -115,8 +112,6 @@ CREATE TABLE customers (
     gender ENUM('M','F'),
     phone_number VARCHAR(11)
 );
-DESC customers;
-
 CREATE TABLE orders (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT,
@@ -126,5 +121,14 @@ CREATE TABLE orders (
     FOREIGN KEY (customer_id) REFERENCES customers(id)
 );
 
+> SELECT the order id and customers phone number from all orders of product id 4
+> SELECT product name and order time for filter coffee sold between JAn 15 2017
+> SELECT thr product name and price and order time for all orders  from females in jan   2017
+
+
+
 SHOW TABLES;
 DESC orders;
+
+DESC products;
+DESC customers;
