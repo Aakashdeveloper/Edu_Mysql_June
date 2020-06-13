@@ -1,0 +1,122 @@
+show databases;
+
+select * from mysql.user;
+
+create user 'aakashh'@'localhost' identified by 'admin987';
+
+grant all privileges on *.* to 'aakash'@'localhost';
+
+grant select on cinema_booking_system.* to aakash@localhost;
+
+grant select on cinema_booking_system.* to 'aakashh'@'%';
+
+drop user aakashh@localhost;
+
+show databases;
+USE cinema_booking_system;
+SELECT * from rooms;
+
+
+
+////////////
+Views
+////////////
+show databases;
+USE cinema_booking_system;
+SELECT * from films;
+
+show tables;
+
+create view filmview as select id, name from films;
+
+select * from filmview;
+
+INSERT INTO films (name, length_min)
+VALUES ('Avengers',143);
+
+show full tables;
+
+SELECT f.name, s.start_time FROM films f 
+JOIN screenings s ON f.id = s.film_id;
+
+create view film_screen as SELECT f.name, s.start_time FROM films f 
+JOIN screenings s ON f.id = s.film_id;
+
+select * from film_screen;
+
+
+create algorithm=merge view filmview as select id, name from films;
+
+create algorithm=temptable view filmview as select id, name from films;
+create view filmlengthview as select name, length_min from films where length_min>120;
+
+select * from filmlengthview;
+
+/////////////////////
+Lock
+////////////////////
+
+LOCK TABLES films WRITE;
+INSERT INTO films (name, length_min) VALUES ('Avengers',143);
+UNLOCK TABLES
+
+
+
+LOCK TABLES films WRITE;
+INSERT INTO films (name, length_min) VALUES ('Load Runner',143);
+UNLOCK TABLES;
+
+
+LOCK TABLES films WRITE;
+
+LOCK TABLES films WRITE, rooms write;
+
+LOCK TABLES films read;
+
+SELECT * from films
+
+////////
+Variables
+////////
+
+show databases;
+USE cinema_booking_system;
+
+SELECT 5+100;
+select now();
+
+set @user='john';
+select @user;
+
+set @length = 120;
+ select name, length_min from films where length_min>@length;
+
+////////
+Transactions
+////////
+
+
+show databases;
+use cinema_booking_system;
+
+
+
+INSERT INTO films (name, length_min) VALUES ('Iron Man2',143);
+
+INSERT INTO films (name, length_min) VALUES ('Rambo3',111);
+INSERT INTO films (name, length_min) VALUES ('Big Hero2',145);
+
+SELECT * from films
+
+/////////
+RollBack
+///////
+
+START TRANSACTION;
+INSERT INTO films (name, length_min) VALUES ('King of xyz',111);
+select * from films;
+delete from films where id=23;
+savepoint test1;
+
+update films set name="Rambo2" where id = 22;
+rollback to test1;

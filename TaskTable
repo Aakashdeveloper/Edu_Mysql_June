@@ -29,6 +29,7 @@ CREATE TABLE screenings(
     FOREIGN KEY (room_id) REFERENCES rooms(id)
 );
 
+
 CREATE TABLE seats(
     id INT PRIMARY KEY AUTO_INCREMENT,
     rown CHAR(1) NOT NULL,
